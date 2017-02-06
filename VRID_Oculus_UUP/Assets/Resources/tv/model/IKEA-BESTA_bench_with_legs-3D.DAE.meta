@@ -1,0 +1,165 @@
+fileFormatVersion: 2
+guid: f1dfdcd4cb091cc43a5b385851bdb798
+timeCreated: 1474047327
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: ChamferBox001
+    100002: ChamferBox003
+    100004: ChamferBox004
+    100006: Cylinder001
+    100008: Cylinder004
+    100010: Cylinder006
+    100012: Cylinder008
+    100014: Cylinder009
+    100016: Cylinder012
+    100018: Cylinder014
+    100020: Cylinder015
+    100022: Cylinder017
+    100024: Cylinder020
+    100026: //RootNode
+    100028: Rectangle001
+    100030: Rectangle002
+    100032: Rectangle003
+    100034: Rectangle004
+    100036: Rectangle005
+    400000: ChamferBox001
+    400002: ChamferBox003
+    400004: ChamferBox004
+    400006: Cylinder001
+    400008: Cylinder004
+    400010: Cylinder006
+    400012: Cylinder008
+    400014: Cylinder009
+    400016: Cylinder012
+    400018: Cylinder014
+    400020: Cylinder015
+    400022: Cylinder017
+    400024: Cylinder020
+    400026: //RootNode
+    400028: Rectangle001
+    400030: Rectangle002
+    400032: Rectangle003
+    400034: Rectangle004
+    400036: Rectangle005
+    2300000: ChamferBox001
+    2300002: ChamferBox003
+    2300004: ChamferBox004
+    2300006: Cylinder001
+    2300008: Cylinder004
+    2300010: Cylinder006
+    2300012: Cylinder008
+    2300014: Cylinder009
+    2300016: Cylinder012
+    2300018: Cylinder014
+    2300020: Cylinder015
+    2300022: Cylinder017
+    2300024: Cylinder020
+    2300026: Rectangle001
+    2300028: Rectangle002
+    2300030: Rectangle003
+    2300032: Rectangle004
+    2300034: Rectangle005
+    3300000: ChamferBox001
+    3300002: ChamferBox003
+    3300004: ChamferBox004
+    3300006: Cylinder001
+    3300008: Cylinder004
+    3300010: Cylinder006
+    3300012: Cylinder008
+    3300014: Cylinder009
+    3300016: Cylinder012
+    3300018: Cylinder014
+    3300020: Cylinder015
+    3300022: Cylinder017
+    3300024: Cylinder020
+    3300026: Rectangle001
+    3300028: Rectangle002
+    3300030: Rectangle003
+    3300032: Rectangle004
+    3300034: Rectangle005
+    4300000: ChamferBox001
+    4300002: Rectangle001
+    4300004: ChamferBox003
+    4300006: Rectangle002
+    4300008: Rectangle003
+    4300010: Rectangle004
+    4300012: Rectangle005
+    4300014: ChamferBox004
+    4300016: Cylinder001
+    4300018: Cylinder004
+    4300020: Cylinder006
+    4300022: Cylinder008
+    4300024: Cylinder009
+    4300026: Cylinder012
+    4300028: Cylinder014
+    4300030: Cylinder015
+    4300032: Cylinder017
+    4300034: Cylinder020
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

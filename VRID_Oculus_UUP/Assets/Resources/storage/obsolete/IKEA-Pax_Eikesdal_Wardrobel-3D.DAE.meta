@@ -1,0 +1,154 @@
+fileFormatVersion: 2
+guid: 688b33ee3e2c4334f862d0558d3bcbf6
+timeCreated: 1473416840
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: ______001
+    100002: Box24
+    100004: Box25
+    100006: Circle01
+    100008: //RootNode
+    100010: Object03
+    100012: Object03-Pivot
+    100014: Rectangle01
+    100016: Rectangle02
+    100018: Rectangle04
+    100020: Rectangle05
+    100022: Rectangle07
+    100024: shoes_01
+    100026: shoes_01-Pivot
+    100028: shoes_02
+    100030: shoes_02-Pivot
+    100032: shoes_03
+    100034: shoes_03-Pivot
+    100036: shoes_04
+    100038: shoes_04-Pivot
+    400000: ______001
+    400002: Box24
+    400004: Box25
+    400006: Circle01
+    400008: //RootNode
+    400010: Object03
+    400012: Object03-Pivot
+    400014: Rectangle01
+    400016: Rectangle02
+    400018: Rectangle04
+    400020: Rectangle05
+    400022: Rectangle07
+    400024: shoes_01
+    400026: shoes_01-Pivot
+    400028: shoes_02
+    400030: shoes_02-Pivot
+    400032: shoes_03
+    400034: shoes_03-Pivot
+    400036: shoes_04
+    400038: shoes_04-Pivot
+    2300000: ______001
+    2300002: Box24
+    2300004: Box25
+    2300006: Circle01
+    2300008: Object03-Pivot
+    2300010: Rectangle01
+    2300012: Rectangle02
+    2300014: Rectangle04
+    2300016: Rectangle05
+    2300018: Rectangle07
+    2300020: shoes_01-Pivot
+    2300022: shoes_02-Pivot
+    2300024: shoes_03-Pivot
+    2300026: shoes_04-Pivot
+    3300000: ______001
+    3300002: Box24
+    3300004: Box25
+    3300006: Circle01
+    3300008: Object03-Pivot
+    3300010: Rectangle01
+    3300012: Rectangle02
+    3300014: Rectangle04
+    3300016: Rectangle05
+    3300018: Rectangle07
+    3300020: shoes_01-Pivot
+    3300022: shoes_02-Pivot
+    3300024: shoes_03-Pivot
+    3300026: shoes_04-Pivot
+    4300000: Rectangle01
+    4300002: Rectangle04
+    4300004: Rectangle05
+    4300006: Object03-Pivot
+    4300008: Rectangle02
+    4300010: Rectangle07
+    4300012: shoes_02-Pivot
+    4300014: shoes_03-Pivot
+    4300016: shoes_01-Pivot
+    4300018: shoes_04-Pivot
+    4300020: Circle01
+    4300022: Box24
+    4300024: Box25
+    4300026: ______001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,426 @@
+fileFormatVersion: 2
+guid: e59deaec61373724b9b08423fb426819
+timeCreated: 1473638817
+licenseType: Free
+SketchUpImporter:
+  generateBackFace: 0
+  mergeCoplanarFaces: 0
+  selectedNodes: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000200000002100000022000000230000002400000025000000260000002700000028000000290000002a0000002b0000002c0000002d0000002e0000002f000000300000003100000032000000330000003400000035000000360000003700000038000000390000003a0000003b0000003c0000003d0000003e0000003f000000400000004100000042000000430000004400000045000000460000004700000048000000490000004a0000004b0000004c0000004d0000004e0000004f000000500000005100000052000000530000005400000055000000560000005700000058000000590000005a0000005b0000005c0000005d0000005e0000005f000000600000006100000062000000630000006400000065000000660000006700000068000000690000006a0000006b0000006c0000006d0000006e0000006f000000700000007100000072000000730000007400000075000000760000007700000078000000790000007a0000007b0000007c0000007d0000007e0000007f000000800000008100000082000000830000008400000085000000860000008700000088000000890000008a0000008b0000008c0000008d0000008e0000008f00000090000000
+  assetHash:
+    serializedVersion: 2
+    Hash: 018ac261591fd4b5cfed15038b07d109
+  longitude: 116.407412
+  latitude: 39.904196
+  northCorrection: 359.61977717100933
+  fileUnit: 0
+  sketchUpImportData:
+    defaultCamera:
+      position: {x: 104.80587, y: 12.073146, z: 14.696377}
+      lookAt: {x: 104.85809, y: 1.3993413, z: 19.6032}
+      up: {x: 0.009671928, y: 0.41770557, z: 0.90853095}
+      fov: 35
+      aspectRatio: 0
+      orthoSize: 1
+      isPerspective: 1
+    scenes: []
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: 520_S
+    100002: Cistern
+    100004: Faucet_Half
+    100006: Faucet_Half 1
+    100008: Flusher
+    100010: Group 10
+    100012: Group 102
+    100014: Group 104
+    100016: Group 105
+    100018: Group 107
+    100020: Group 109
+    100022: Group 111
+    100024: Group 12
+    100026: Group 135
+    100028: Group 137
+    100030: Group 139
+    100032: Group 14
+    100034: Group 141
+    100036: Group 143
+    100038: Group 16
+    100040: Group 18
+    100042: Group 2
+    100044: Group 20
+    100046: Group 22
+    100048: Group 24
+    100050: Group 26
+    100052: Group 28
+    100054: Group 30
+    100056: Group 32
+    100058: Group 34
+    100060: Group 36
+    100062: Group 38
+    100064: Group 4
+    100066: Group 40
+    100068: Group 42
+    100070: Group 44
+    100072: Group 46
+    100074: Group 48
+    100076: Group 50
+    100078: Group 52
+    100080: Group 54
+    100082: Group 56
+    100084: Group 58
+    100086: Group 6
+    100088: Group 60
+    100090: Group 62
+    100092: Group 64
+    100094: Group 66
+    100096: Group 68
+    100098: Group 70
+    100100: Group 72
+    100102: Group 74
+    100104: Group 76
+    100106: Group 78
+    100108: Group 8
+    100110: Group 80
+    100112: Group 82
+    100114: Group 84
+    100116: Group 86
+    100118: Group 88
+    100120: Group 90
+    100122: Group 92
+    100124: Group 94
+    100126: Group 96
+    100128: Group 98
+    100130: K-510 Dynametric 5' Bath
+    100132: Modern rectangular sink
+    100134: RK-DRAIN
+    100136: Seat
+    100138: //RootNode
+    100140: TemporaryItemsskpU7bv7p
+    100142: WC
+    100144: "\u51B0\u7BB1"
+    100146: "\u6C34\u69FD"
+    400000: 520_S
+    400002: Cistern
+    400004: Faucet_Half
+    400006: Faucet_Half 1
+    400008: Flusher
+    400010: Group 10
+    400012: Group 102
+    400014: Group 104
+    400016: Group 105
+    400018: Group 107
+    400020: Group 109
+    400022: Group 111
+    400024: Group 12
+    400026: Group 135
+    400028: Group 137
+    400030: Group 139
+    400032: Group 14
+    400034: Group 141
+    400036: Group 143
+    400038: Group 16
+    400040: Group 18
+    400042: Group 2
+    400044: Group 20
+    400046: Group 22
+    400048: Group 24
+    400050: Group 26
+    400052: Group 28
+    400054: Group 30
+    400056: Group 32
+    400058: Group 34
+    400060: Group 36
+    400062: Group 38
+    400064: Group 4
+    400066: Group 40
+    400068: Group 42
+    400070: Group 44
+    400072: Group 46
+    400074: Group 48
+    400076: Group 50
+    400078: Group 52
+    400080: Group 54
+    400082: Group 56
+    400084: Group 58
+    400086: Group 6
+    400088: Group 60
+    400090: Group 62
+    400092: Group 64
+    400094: Group 66
+    400096: Group 68
+    400098: Group 70
+    400100: Group 72
+    400102: Group 74
+    400104: Group 76
+    400106: Group 78
+    400108: Group 8
+    400110: Group 80
+    400112: Group 82
+    400114: Group 84
+    400116: Group 86
+    400118: Group 88
+    400120: Group 90
+    400122: Group 92
+    400124: Group 94
+    400126: Group 96
+    400128: Group 98
+    400130: K-510 Dynametric 5' Bath
+    400132: Modern rectangular sink
+    400134: RK-DRAIN
+    400136: Seat
+    400138: //RootNode
+    400140: TemporaryItemsskpU7bv7p
+    400142: WC
+    400144: "\u51B0\u7BB1"
+    400146: "\u6C34\u69FD"
+    2300000: Cistern
+    2300002: Faucet_Half
+    2300004: Faucet_Half 1
+    2300006: Flusher
+    2300008: Group 10
+    2300010: Group 102
+    2300012: Group 105
+    2300014: Group 107
+    2300016: Group 109
+    2300018: Group 111
+    2300020: Group 12
+    2300022: Group 135
+    2300024: Group 137
+    2300026: Group 139
+    2300028: Group 14
+    2300030: Group 141
+    2300032: Group 143
+    2300034: Group 16
+    2300036: Group 18
+    2300038: Group 2
+    2300040: Group 20
+    2300042: Group 22
+    2300044: Group 24
+    2300046: Group 26
+    2300048: Group 28
+    2300050: Group 30
+    2300052: Group 32
+    2300054: Group 34
+    2300056: Group 36
+    2300058: Group 38
+    2300060: Group 4
+    2300062: Group 40
+    2300064: Group 42
+    2300066: Group 44
+    2300068: Group 46
+    2300070: Group 48
+    2300072: Group 50
+    2300074: Group 52
+    2300076: Group 54
+    2300078: Group 56
+    2300080: Group 58
+    2300082: Group 6
+    2300084: Group 60
+    2300086: Group 62
+    2300088: Group 64
+    2300090: Group 66
+    2300092: Group 68
+    2300094: Group 70
+    2300096: Group 72
+    2300098: Group 74
+    2300100: Group 76
+    2300102: Group 78
+    2300104: Group 8
+    2300106: Group 80
+    2300108: Group 82
+    2300110: Group 84
+    2300112: Group 86
+    2300114: Group 88
+    2300116: Group 90
+    2300118: Group 92
+    2300120: Group 94
+    2300122: Group 96
+    2300124: Group 98
+    2300126: K-510 Dynametric 5' Bath
+    2300128: Modern rectangular sink
+    2300130: RK-DRAIN
+    2300132: Seat
+    2300134: //RootNode
+    2300136: WC
+    2300138: "\u51B0\u7BB1"
+    2300140: "\u6C34\u69FD"
+    3300000: Cistern
+    3300002: Faucet_Half
+    3300004: Faucet_Half 1
+    3300006: Flusher
+    3300008: Group 10
+    3300010: Group 102
+    3300012: Group 105
+    3300014: Group 107
+    3300016: Group 109
+    3300018: Group 111
+    3300020: Group 12
+    3300022: Group 135
+    3300024: Group 137
+    3300026: Group 139
+    3300028: Group 14
+    3300030: Group 141
+    3300032: Group 143
+    3300034: Group 16
+    3300036: Group 18
+    3300038: Group 2
+    3300040: Group 20
+    3300042: Group 22
+    3300044: Group 24
+    3300046: Group 26
+    3300048: Group 28
+    3300050: Group 30
+    3300052: Group 32
+    3300054: Group 34
+    3300056: Group 36
+    3300058: Group 38
+    3300060: Group 4
+    3300062: Group 40
+    3300064: Group 42
+    3300066: Group 44
+    3300068: Group 46
+    3300070: Group 48
+    3300072: Group 50
+    3300074: Group 52
+    3300076: Group 54
+    3300078: Group 56
+    3300080: Group 58
+    3300082: Group 6
+    3300084: Group 60
+    3300086: Group 62
+    3300088: Group 64
+    3300090: Group 66
+    3300092: Group 68
+    3300094: Group 70
+    3300096: Group 72
+    3300098: Group 74
+    3300100: Group 76
+    3300102: Group 78
+    3300104: Group 8
+    3300106: Group 80
+    3300108: Group 82
+    3300110: Group 84
+    3300112: Group 86
+    3300114: Group 88
+    3300116: Group 90
+    3300118: Group 92
+    3300120: Group 94
+    3300122: Group 96
+    3300124: Group 98
+    3300126: K-510 Dynametric 5' Bath
+    3300128: Modern rectangular sink
+    3300130: RK-DRAIN
+    3300132: Seat
+    3300134: //RootNode
+    3300136: WC
+    3300138: "\u51B0\u7BB1"
+    3300140: "\u6C34\u69FD"
+    4300000: Mesh sketchup
+    4300002: Mesh Group 2
+    4300004: Mesh Group 4
+    4300006: Mesh Group 6
+    4300008: Mesh Group 8
+    4300010: Mesh Group 30
+    4300012: Mesh Group 32
+    4300014: Mesh Group 34
+    4300016: Mesh Group 36
+    4300018: Mesh Group 38
+    4300020: Mesh Group 40
+    4300022: Mesh Group 42
+    4300024: Mesh Group 44
+    4300026: Mesh Group 46
+    4300028: Mesh Group 48
+    4300030: Mesh Group 56
+    4300032: Mesh Group 58
+    4300034: Mesh Group 60
+    4300036: Mesh Group 62
+    4300038: Mesh Group 64
+    4300040: Mesh Group 72
+    4300042: Mesh Group 80
+    4300044: Mesh Group 82
+    4300046: Mesh Group 90
+    4300048: Mesh Group 92
+    4300050: "Mesh \u6C34\u69FD"
+    4300052: Mesh Group 102
+    4300054: Mesh Group 105
+    4300056: Mesh Group 107
+    4300058: Mesh Group 109
+    4300060: Mesh Group 111
+    4300062: Mesh Cistern
+    4300064: Mesh Flusher
+    4300066: Mesh Seat
+    4300068: Mesh WC
+    4300070: Mesh RK-DRAIN
+    4300072: Mesh K-510 Dynametric 5' Bath
+    4300074: Mesh Modern rectangular sink
+    4300076: Mesh Faucet_Half
+    4300078: "Mesh \u51B0\u7BB1"
+    4300080: Mesh Group 135
+    4300082: Mesh Group 137
+    4300084: Mesh Group 141
+    4300086: Mesh Group 143
+  materials:
+    importMaterials: 1
+    materialName: 2
+    materialSearch: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.0254
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
