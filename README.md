@@ -10,5 +10,8 @@ We aim to design and implement an user-friendly application for personal interio
 ### Project Manager
   Liu, Yishuo
 ### Development
-
+  Brandon Chen
+  Ismael Cuevas
+  Rizky Wellyanto
 ### Design
+  Madison
