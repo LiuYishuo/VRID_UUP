@@ -4,7 +4,7 @@
 
 ### Everyone >> Preparing the tools
 1. Clone this repo
-2. Download and Install Unity 5.6.0b6, version matters
+2. Download and Install Unity 5.4.0f3, version matters
 3. Download Oculus SDK (url: https://developer3.oculus.com/downloads/game-engines/1.10.0/Oculus_Utilities_for_Unity_5/ )
 4. Run and test the Unity project on your machine
 5. Apply for the VR Lab access
