@@ -195,7 +195,8 @@ public class OVRPlayerController : MonoBehaviour
 		else
 			FallSpeed += ((Physics.gravity.y * (GravityModifier * 0.002f)) * SimulationRate * Time.deltaTime);
 
-		moveDirection.y += FallSpeed * SimulationRate * Time.deltaTime;
+        // disallow falling to keep user at constant height
+		// moveDirection.y += FallSpeed * SimulationRate * Time.deltaTime;
 
 		// Offset correction for uneven ground
 		float bumpUpOffset = 0.0f;
@@ -248,9 +249,9 @@ public class OVRPlayerController : MonoBehaviour
 			 (moveBack && moveLeft)    || (moveBack && moveRight) )
 			MoveScale = 0.70710678f;
 
-		// No positional movement if we are in the air
-		if (!Controller.isGrounded)
-			MoveScale = 0.0f;
+		// Allow air movement because reasons
+		//if (!Controller.isGrounded)
+		//	MoveScale = 0.0f;
 
 		MoveScale *= SimulationRate * Time.deltaTime;
 
