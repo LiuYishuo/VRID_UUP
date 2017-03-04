@@ -78,6 +78,11 @@ public class OVRPlayerController : MonoBehaviour
 	/// </summary>
 	public bool useProfileData = true;
 
+    /// <summary>
+    /// This is the UI canvas that has the options
+    /// </summary>
+    public GameObject optionPanel;
+
 	protected CharacterController Controller = null;
 	protected OVRCameraRig CameraRig = null;
 
@@ -94,7 +99,10 @@ public class OVRPlayerController : MonoBehaviour
 	private bool prevHatRight = false;
 	private float SimulationRate = 60f;
 
-	void Start()
+    // this is to check whether the options screen is open
+    private bool optionShown = false;
+
+    void Start()
 	{
 		// Add eye-depth as a camera offset from the player controller
 		var p = CameraRig.transform.localPosition;
@@ -216,7 +224,31 @@ public class OVRPlayerController : MonoBehaviour
 
 		if (predictedXZ != actualXZ)
 			MoveThrottle += (actualXZ - predictedXZ) / (SimulationRate * Time.deltaTime);
+
+        // Option button
+        GameControllerHandler();
+
+
 	}
+
+    public virtual void GameControllerHandler()
+    {
+        if (OVRInput.GetUp(OVRInput.Button.Start))
+        {
+            if (optionShown)
+            {
+                Debug.Log("Toggle off");
+                optionPanel.SetActive(false);
+                optionShown = false;
+            }
+            else
+            {
+                Debug.Log("Toggle on");
+                optionPanel.SetActive(true);
+                optionShown = true;
+            }
+        }
+    }
 
 	public virtual void UpdateMovement()
 	{
