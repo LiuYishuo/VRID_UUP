@@ -100,7 +100,7 @@ public class OVRPlayerController : MonoBehaviour
 	private float SimulationRate = 60f;
 
     // this is to check whether the options screen is open
-    private bool optionShown = true;
+    private bool menuShown = true;
 
     void Start()
 	{
@@ -235,18 +235,24 @@ public class OVRPlayerController : MonoBehaviour
     {
         if (OVRInput.GetUp(OVRInput.Button.Start))
         {
-            if (optionShown)
+            if (menuShown)
             {
-                Debug.Log("Toggle off");
+                //Debug.Log("Toggle off");
                 mainMenu.SetActive(false);
-                optionShown = false;
+                menuShown = false;
+                //Debug.Log(mainMenu.transform.GetChild(1).gameObject.name);
             }
             else
             {
-                Debug.Log("Toggle on");
+                //Debug.Log("Toggle on");
                 mainMenu.SetActive(true);
-                optionShown = true;
+                menuShown = true;
+
+                Debug.Log(GameObject.Find("MainMenuPanel"));
+                // get the childrens and render the 'category selector'
             }
+
+
         }
     }
 
