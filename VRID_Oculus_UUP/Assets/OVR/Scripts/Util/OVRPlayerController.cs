@@ -81,7 +81,7 @@ public class OVRPlayerController : MonoBehaviour
     /// <summary>
     /// This is the UI canvas that has the options
     /// </summary>
-    public GameObject optionPanel;
+    public GameObject mainMenu;
 
 	protected CharacterController Controller = null;
 	protected OVRCameraRig CameraRig = null;
@@ -100,7 +100,7 @@ public class OVRPlayerController : MonoBehaviour
 	private float SimulationRate = 60f;
 
     // this is to check whether the options screen is open
-    private bool optionShown = false;
+    private bool optionShown = true;
 
     void Start()
 	{
@@ -238,13 +238,13 @@ public class OVRPlayerController : MonoBehaviour
             if (optionShown)
             {
                 Debug.Log("Toggle off");
-                optionPanel.SetActive(false);
+                mainMenu.SetActive(false);
                 optionShown = false;
             }
             else
             {
                 Debug.Log("Toggle on");
-                optionPanel.SetActive(true);
+                mainMenu.SetActive(true);
                 optionShown = true;
             }
         }
