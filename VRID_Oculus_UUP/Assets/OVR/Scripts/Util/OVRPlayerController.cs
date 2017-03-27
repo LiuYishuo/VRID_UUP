@@ -248,11 +248,9 @@ public class OVRPlayerController : MonoBehaviour
                 mainMenu.SetActive(true);
                 menuShown = true;
 
-                Debug.Log(GameObject.Find("MainMenuPanel"));
+                //Debug.Log(GameObject.Find("MainMenuPanel"));
                 // get the childrens and render the 'category selector'
             }
-
-
         }
     }
 
