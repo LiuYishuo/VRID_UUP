@@ -6,6 +6,9 @@ public class MainMenuController : MonoBehaviour {
 
     private Categories currentCategory = Categories.Tables;
 
+    private Transform[] categories;
+    private Transform[] contents;
+
     // Use this for initialization
     void Start () {
         // instantiate the private parts
@@ -13,24 +16,38 @@ public class MainMenuController : MonoBehaviour {
 
         // populate the furniture
         populateObjects();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        // A Button
-        //if (OVRInput.GetUp(OVRInput.Button.One))
-        //{
-        //    highlightCategory();
-        //}
 
+        // get categories and contents
+        setCategoriesContents();
+	}
+
+    private void setCategoriesContents()
+    {
+        this.categories = this.getFirstChildren(this.gameObject.transform.Find("CategoryPanel"));
+        this.contents = this.getFirstChildren(this.gameObject.transform.Find("FurniturePanel"));
+
+        updateContent();
+    }
+
+    // Update is called once per frame
+    void Update () {
         // this is for changing categories when user hit the bumpers
         updateCategory();
-
+        
         // automatic highlighting of the category
         highlightCategory();
     }
 
     // TODO make the content change when the category changes
+    private void updateContent()
+    {      
+        for (int i = 0; i < contents.Length; i++)
+            contents[i].gameObject.SetActive(false);
+
+        // turn on content based on category
+        contents[(int) currentCategory].gameObject.SetActive(true);
+    }
+
     private void updateCategory()
     {
         // Left Bumper
@@ -38,15 +55,16 @@ public class MainMenuController : MonoBehaviour {
         {
             int index = (((int) currentCategory - 1) % 4 + 4) % 4;
             currentCategory = (Categories) index;
-            Debug.Log((int)currentCategory);
+            updateContent();
         }
 
         // Right Bumper
         if (Input.GetKeyUp("joystick button 5"))
         {
             currentCategory = (Categories)((int)(currentCategory + 1) % 4);
-            Debug.Log((int)currentCategory);
+            updateContent();
         }
+
     }
 
     // this function should populate the furnitures of the current selected category
@@ -58,37 +76,26 @@ public class MainMenuController : MonoBehaviour {
     // highlight the current category
     private void highlightCategory()
     {
-        Transform[] children = this.gameObject.transform.GetChild(0).GetComponentsInChildren<Transform>();
+        for (int i = 0; i < categories.Length; i++)
+            categories[i].gameObject.GetComponent<Text>().color = Color.black;
 
-        //Debug.Log(children.Length);
+        // highlight current category
+        categories[(int) currentCategory].gameObject.GetComponent<Text>().color = Color.yellow;
+    }
 
-        //foreach (Transform t in children)
-        //{
-        //    Debug.Log(t.name);
-        //}
-
-        for (int i = 1; i < 5; i++)
+    // This is a helper function that gets the first immediate children of a certain game component
+    private Transform[] getFirstChildren(Transform parent)
+    {
+        Transform[] children = new Transform[parent.childCount];
+        int index = 0;
+        
+        foreach (Transform child in parent)
         {
-            children[i].gameObject.GetComponent<Text>().color = Color.black;
+            children[index] = child;
+            index++;
         }
 
-        switch (currentCategory)
-        {
-            case Categories.Tables:
-                children[1].gameObject.GetComponent<Text>().color = Color.yellow;
-                break;
-            case Categories.Chairs:
-                children[2].gameObject.GetComponent<Text>().color = Color.yellow;
-                break;
-            case Categories.Sofas:
-                children[3].gameObject.GetComponent<Text>().color = Color.yellow;
-                break;
-            case Categories.Lamps:
-                children[4].gameObject.GetComponent<Text>().color = Color.yellow;
-                break;
-            default:
-                break;
-        }
+        return children;
     }
 }
 
