@@ -82,10 +82,14 @@ public class TeleportController : MonoBehaviour {
         else if (Physics.Raycast(pointerTransform.position, pointerTransform.forward, out hit, maxTeleportRange, teleportLayerMask))
         {
             TeleportPoint tp = hit.collider.gameObject.GetComponent<TeleportPoint>();
+            /*
             Debug.Log("wtf");
             Debug.Log(hit);
             Debug.Log(hit.collider);
             Debug.Log(hit.collider.gameObject.name);
+            */
+
+            Debug.Log(hit.distance);
 
             // Debug.Log(tp);
             tp.OnLookAt();
@@ -104,12 +108,14 @@ public class TeleportController : MonoBehaviour {
     {
         teleporting = true;
         
+        /*
         if (currentTeleportPoint)
         {
             currentTeleportPoint.GetComponent<MeshRenderer>().enabled = true;
         }
+        */
         currentTeleportPoint = tp;
-        currentTeleportPoint.GetComponent<MeshRenderer>().enabled = false;
+        //currentTeleportPoint.GetComponent<MeshRenderer>().enabled = true;
         
         positionIndicator = GameObject.Instantiate<GameObject>(positionIndicatorPrefab);
         positionIndicator.transform.position = tp.GetDestTransform().position;
