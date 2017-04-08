@@ -14,12 +14,12 @@ public class MainMenuController : MonoBehaviour {
         // instantiate the private parts
         currentCategory = Categories.Tables;
 
-        // populate the furniture
-        populateObjects();
-
         // get categories and contents
         setCategoriesContents();
-	}
+
+        // populate the furniture
+        populateObjects();
+    }
 
     private void setCategoriesContents()
     {
@@ -70,7 +70,21 @@ public class MainMenuController : MonoBehaviour {
     // this function should populate the furnitures of the current selected category
     private void populateObjects()
     {
-
+        // contents
+        //Debug.Log(contents[0].transform.name);
+        GameObject testDummy = new GameObject("Brandon long schlong");
+        Text test =  testDummy.AddComponent<Text>();
+        test.text = "Brandon big schlong";
+        test.font = new Font();
+        RectTransform rect =  test.GetComponent<RectTransform>();
+        rect.sizeDelta = new Vector2(1000,500); 
+        rect.position = new Vector3(0, 0, 0);
+        testDummy.transform.SetParent(contents[0].gameObject.transform);
+        testDummy.transform.position = new Vector3(0, 0, 0);
+        Debug.Log(rect.position.x);
+        Debug.Log(rect.position.y);
+        Debug.Log(rect.position.z);
+        //testDummy.transform.parent = contents[0].transform;
     }
 
     // highlight the current category
