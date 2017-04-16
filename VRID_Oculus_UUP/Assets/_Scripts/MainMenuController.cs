@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEditor;
 
 public class MainMenuController : MonoBehaviour {
 
-    private Categories currentCategory = Categories.Tables;
+    private Category currentCategory = Category.Tables;
 
     private Transform[] categories;
     private Transform[] contents;
@@ -12,7 +13,7 @@ public class MainMenuController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         // instantiate the private parts
-        currentCategory = Categories.Tables;
+        currentCategory = Category.Tables;
 
         // get categories and contents
         setCategoriesContents();
@@ -54,14 +55,14 @@ public class MainMenuController : MonoBehaviour {
         if (Input.GetKeyUp("joystick button 4"))
         {
             int index = (((int) currentCategory - 1) % 4 + 4) % 4;
-            currentCategory = (Categories) index;
+            currentCategory = (Category) index;
             updateContent();
         }
 
         // Right Bumper
         if (Input.GetKeyUp("joystick button 5"))
         {
-            currentCategory = (Categories)((int)(currentCategory + 1) % 4);
+            currentCategory = (Category)((int)(currentCategory + 1) % 4);
             updateContent();
         }
 
@@ -71,20 +72,22 @@ public class MainMenuController : MonoBehaviour {
     private void populateObjects()
     {
         // contents
-        //Debug.Log(contents[0].transform.name);
-        GameObject testDummy = new GameObject("Brandon long schlong");
-        Text test =  testDummy.AddComponent<Text>();
-        test.text = "Brandon big schlong";
-        test.font = new Font();
-        RectTransform rect =  test.GetComponent<RectTransform>();
-        rect.sizeDelta = new Vector2(1000,500); 
-        rect.position = new Vector3(0, 0, 0);
-        testDummy.transform.SetParent(contents[0].gameObject.transform);
-        testDummy.transform.position = new Vector3(0, 0, 0);
-        Debug.Log(rect.position.x);
-        Debug.Log(rect.position.y);
-        Debug.Log(rect.position.z);
-        //testDummy.transform.parent = contents[0].transform;
+
+        // this is a test for dynamically creating an object inside the content panel
+        //GameObject testDummy = new GameObject("Brandon long schlong");
+        //Text test =  testDummy.AddComponent<Text>();
+        //test.text = "Brandon is gay";
+        //Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
+        //test.font = ArialFont;
+        //test.material = ArialFont.material;
+        //testDummy.GetComponent<RectTransform>().transform.localPosition = new Vector3(0,-50,800);
+        //testDummy.transform.SetParent(contents[0].gameObject.transform);
+
+        // TODO this is a test for loading the items
+        GameObject furniture = Resources.Load<GameObject>("bed/obsolete/Anes_Double__Bed-3D");
+        Debug.Log(furniture);
+        Texture2D preview = AssetPreview.GetAssetPreview(furniture);
+        Debug.Log(preview);
     }
 
     // highlight the current category
@@ -112,5 +115,3 @@ public class MainMenuController : MonoBehaviour {
         return children;
     }
 }
-
-enum Categories { Tables, Chairs, Sofas, Lamps};

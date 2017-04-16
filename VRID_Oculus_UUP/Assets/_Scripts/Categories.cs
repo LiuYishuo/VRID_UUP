@@ -1,0 +1,1 @@
+﻿public enum Category { Tables, Chairs, Sofas, Lamps };
