@@ -82,16 +82,6 @@ public class TeleportController : MonoBehaviour {
         else if (Physics.Raycast(pointerTransform.position, pointerTransform.forward, out hit, maxTeleportRange, teleportLayerMask))
         {
             TeleportPoint tp = hit.collider.gameObject.GetComponent<TeleportPoint>();
-            /*
-            Debug.Log("wtf");
-            Debug.Log(hit);
-            Debug.Log(hit.collider);
-            Debug.Log(hit.collider.gameObject.name);
-            */
-
-            Debug.Log(hit.distance);
-
-            // Debug.Log(tp);
             tp.OnLookAt();
 
             if (teleportEnabled && !teleporting && (OVRInput.GetDown(teleportButton) || Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)))
