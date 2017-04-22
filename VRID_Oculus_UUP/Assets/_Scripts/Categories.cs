@@ -1,1 +1,1 @@
-﻿public enum Category { Tables, Chairs, Sofas, Lamps };
+﻿public enum Category { Beds, Chairs, Desks, Lamps };

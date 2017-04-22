@@ -5,15 +5,19 @@ using UnityEditor;
 
 public class MainMenuController : MonoBehaviour {
 
-    private Category currentCategory = Category.Tables;
+    private Category currentCategory = Category.Beds;
 
     private Transform[] categories;
     private Transform[] contents;
 
+    // this is for the highlighter/cursor/selector
+    private int selector_x = 0;
+    private int selector_y = 0;
+
     // Use this for initialization
     void Start () {
         // instantiate the private parts
-        currentCategory = Category.Tables;
+        currentCategory = Category.Beds;
 
         // get categories and contents
         setCategoriesContents();
@@ -37,6 +41,8 @@ public class MainMenuController : MonoBehaviour {
         
         // automatic highlighting of the category
         highlightCategory();
+
+        // highlight the current selection depicted by the selector
     }
 
     // TODO make the content change when the category changes
@@ -84,10 +90,10 @@ public class MainMenuController : MonoBehaviour {
         //testDummy.transform.SetParent(contents[0].gameObject.transform);
 
         // TODO this is a test for loading the items
-        GameObject furniture = Resources.Load<GameObject>("bed/obsolete/Anes_Double__Bed-3D");
-        Debug.Log(furniture);
-        Texture2D preview = AssetPreview.GetAssetPreview(furniture);
-        Debug.Log(preview);
+        //GameObject furniture = Resources.Load<GameObject>("bed/obsolete/Anes_Double__Bed-3D");
+        //Debug.Log(furniture);
+        //Texture2D preview = AssetPreview.GetAssetPreview(furniture);
+        //Debug.Log(preview);
     }
 
     // highlight the current category
