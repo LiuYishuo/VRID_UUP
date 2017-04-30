@@ -3,10 +3,11 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEditor;
 
-public class MainMenuController : MonoBehaviour {
+public class MainMenuController : MonoBehaviour
+{
 
     private Category currentCategory = Category.Beds;
-
+    private Transform player;
     private Transform[] categories;
     private Transform[] contents;
     private Transform selector;
@@ -19,8 +20,11 @@ public class MainMenuController : MonoBehaviour {
     private int GRID_X = 5;
     private int GRID_Y = 4;
 
+    public FurnitureLoad furnitureLoad;
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
+        player = GameObject.Find("OVRPlayerController").transform;
         // instantiate the private parts
         currentCategory = Category.Beds;
 
@@ -37,7 +41,7 @@ public class MainMenuController : MonoBehaviour {
     private void setSelector()
     {
         this.selector = this.gameObject.transform.Find("Selector");
-        
+
         highlightSelection();
     }
 
@@ -50,13 +54,24 @@ public class MainMenuController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
+        // Update Menu position
+        Vector3 playerPos = player.transform.position;
+        Vector3 playerDirection = player.transform.forward;
+        float spawnDistance = 300.0f;
+        Vector3 spawnPos = playerPos + playerDirection * spawnDistance;
+        transform.position = spawnPos;
+
+        // Make view look at the player
+        transform.LookAt(2 * transform.position - player.position);
+
         // this is for changing categories when user hit the bumpers
         updateCategory();
-        
+
         // automatic highlighting of the category
         highlightCategory();
-        
+
         // update the location of the selector
         updateSelection();
 
@@ -67,27 +82,32 @@ public class MainMenuController : MonoBehaviour {
     // TODO When the user pressed A. find the current object selected. and render the object
     private void selectFurniture()
     {
-        // TODO. still not working
+
         if (OVRInput.GetUp(OVRInput.Button.One))
         {
             Transform found = null;
 
             int x = selector_x * 200 - 400;
             int y = selector_y * -100 + 150;
-            Vector3 position = new Vector3(x, y - 50, 0);
+            Vector3 position = new Vector3(x, y, 0); // get position vector of our selector
 
             Transform[] furnitureTiles = getFirstChildren(contents[(int)currentCategory].gameObject.transform);
             foreach (Transform item in furnitureTiles)
-                if (item.GetComponent<RectTransform>().transform.localPosition == position)
             {
-                //if (item.GetComponent<RectTransform>().transform.localPosition == position)
+                //Debug.Log("Item pos: " + item.localPosition + " Target pos: " + position);
+                
                 if (item.localPosition == position)
                 {
-                    Debug.Log("found!");
                     found = item;
+                    string furniture = found.GetChild(0).GetComponent<UnityEngine.UI.Text>().text;
+                    Debug.Log("found!" + furniture);
+
+                    furnitureLoad.SpawnFurniture(furniture);
                     break;
                 }
+
             }
+
 
             Debug.Log(found);
         }
@@ -132,17 +152,17 @@ public class MainMenuController : MonoBehaviour {
         int x = selector_x * 200 - 400;
         int y = selector_y * -100 + 150;
 
-        this.selector.localPosition = new Vector3(x, y-50, 0);
+        this.selector.localPosition = new Vector3(x, y - 50, 0);
     }
 
     // make the content change when the category changes
     private void updateContent()
-    {      
+    {
         for (int i = 0; i < contents.Length; i++)
             contents[i].gameObject.SetActive(false);
 
         // turn on content based on category
-        contents[(int) currentCategory].gameObject.SetActive(true);
+        contents[(int)currentCategory].gameObject.SetActive(true);
     }
 
     private void updateCategory()
@@ -152,8 +172,8 @@ public class MainMenuController : MonoBehaviour {
         // Left Bumper
         if (Input.GetKeyUp("joystick button 4"))
         {
-            int index = (((int) currentCategory - 1) % enumLength + enumLength) % enumLength;
-            currentCategory = (Category) index;
+            int index = (((int)currentCategory - 1) % enumLength + enumLength) % enumLength;
+            currentCategory = (Category)index;
             updateContent();
         }
 
@@ -194,7 +214,7 @@ public class MainMenuController : MonoBehaviour {
             categories[i].gameObject.GetComponent<Text>().color = Color.black;
 
         // highlight current category
-        categories[(int) currentCategory].gameObject.GetComponent<Text>().color = Color.yellow;
+        categories[(int)currentCategory].gameObject.GetComponent<Text>().color = Color.yellow;
     }
 
     // This is a helper function that gets the first immediate children of a certain game component
@@ -202,7 +222,7 @@ public class MainMenuController : MonoBehaviour {
     {
         Transform[] children = new Transform[parent.childCount];
         int index = 0;
-        
+
         foreach (Transform child in parent)
         {
             children[index] = child;

@@ -20,6 +20,7 @@ limitations under the License.
 ************************************************************************************/
 
 using UnityEngine;
+using UnityEngine.VR;
 using System.Collections.Generic;
 
 /// <summary>
@@ -225,9 +226,8 @@ public class OVRPlayerController : MonoBehaviour
 		if (predictedXZ != actualXZ)
 			MoveThrottle += (actualXZ - predictedXZ) / (SimulationRate * Time.deltaTime);
 
-        // Option button
+        // Main Menu Controller button
         GameControllerHandler();
-
 
 	}
 
@@ -235,6 +235,7 @@ public class OVRPlayerController : MonoBehaviour
     {
         if (OVRInput.GetUp(OVRInput.Button.Start))
         {
+           
             if (menuShown)
             {
                 //Debug.Log("Toggle off");
@@ -266,18 +267,18 @@ public class OVRPlayerController : MonoBehaviour
 
 		bool dpad_move = false;
 
-		if (OVRInput.Get(OVRInput.Button.DpadUp))
-		{
-			moveForward = true;
-			dpad_move   = true;
+		//if (OVRInput.Get(OVRInput.Button.DpadUp))
+		//{
+		//	moveForward = true;
+		//	dpad_move   = true;
 
-		}
+		//}
 
-		if (OVRInput.Get(OVRInput.Button.DpadDown))
-		{
-			moveBack  = true;
-			dpad_move = true;
-		}
+		//if (OVRInput.Get(OVRInput.Button.DpadDown))
+		//{
+		//	moveBack  = true;
+		//	dpad_move = true;
+		//}
 
 		MoveScale = 1.0f;
 
@@ -364,7 +365,8 @@ public class OVRPlayerController : MonoBehaviour
 
 		Vector2 secondaryAxis = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
 
-		euler.y += secondaryAxis.x * rotateInfluence;
+        // disable right stick
+        // euler.y += secondaryAxis.x * rotateInfluence;
 
 		transform.rotation = Quaternion.Euler(euler);
 	}
