@@ -39,7 +39,7 @@ public static class OVRInput
 		Two                       = 0x00000002, ///< Maps to RawButton: [Gamepad, Touch, RTouch: B], [LTouch: Y]
 		Three                     = 0x00000004, ///< Maps to RawButton: [Gamepad, Touch: X], [LTouch, RTouch: None]
 		Four                      = 0x00000008, ///< Maps to RawButton: [Gamepad, Touch: Y], [LTouch, RTouch: None]
-		Start                     = 0x00000100, ///< Maps to RawButton: [Gamepad: Start], [Touch, LTouch: Start], [RTouch: None]
+		Start                     = 0x00000100, ///< Maps to RawButton: [Gamepad: Start], [Touch, LTouch, RTouch: None]
 		Back                      = 0x00000200, ///< Maps to RawButton: [Gamepad: Back], [Touch, LTouch, RTouch: None]
 		PrimaryShoulder           = 0x00001000, ///< Maps to RawButton: [Gamepad: LShoulder], [Touch, LTouch, RTouch: None]
 		PrimaryIndexTrigger       = 0x00002000, ///< Maps to RawButton: [Gamepad, Touch, LTouch: LIndexTrigger], [RTouch: RIndexTrigger]
@@ -77,7 +77,7 @@ public static class OVRInput
 		B                         = 0x00000002, ///< Maps to Physical Button: [Gamepad, Touch, RTouch: B], [LTouch: None]
 		X                         = 0x00000100, ///< Maps to Physical Button: [Gamepad, Touch, LTouch: X], [RTouch: None]
 		Y                         = 0x00000200, ///< Maps to Physical Button: [Gamepad, Touch, LTouch: Y], [RTouch: None]
-		Start                     = 0x00100000, ///< Maps to Physical Button: [Gamepad: Start], [Touch, LTouch: Start], [RTouch: None]
+		Start                     = 0x00100000, ///< Maps to Physical Button: [Gamepad: Start], [Touch, LTouch, RTouch: None]
 		Back                      = 0x00200000, ///< Maps to Physical Button: [Gamepad: Back], [Touch, LTouch, RTouch: None]
 		LShoulder                 = 0x00000800, ///< Maps to Physical Button: [Gamepad: LShoulder], [Touch, LTouch, RTouch: None]
 		LIndexTrigger             = 0x10000000, ///< Maps to Physical Button: [Gamepad, Touch, LTouch: LIndexTrigger], [RTouch: None]
@@ -211,15 +211,14 @@ public static class OVRInput
 	/// Identifies a controller which can be used to query the virtual or raw input state.
 	public enum Controller
 	{
-		None                      = OVRPlugin.Controller.None,     ///< Null controller.
-		LTouch                    = OVRPlugin.Controller.LTouch,   ///< Left Oculus Touch controller. Virtual input mapping differs from the combined L/R Touch mapping.
-		RTouch                    = OVRPlugin.Controller.RTouch,   ///< Right Oculus Touch controller. Virtual input mapping differs from the combined L/R Touch mapping.
-		Touch                     = OVRPlugin.Controller.Touch,    ///< Combined Left/Right pair of Oculus Touch controllers.
-		Remote                    = OVRPlugin.Controller.Remote,   ///< Oculus Remote controller.
-		Gamepad                   = OVRPlugin.Controller.Gamepad,  ///< Xbox 360 or Xbox One gamepad on PC. Generic gamepad on Android.
-		Touchpad                  = OVRPlugin.Controller.Touchpad, ///< GearVR touchpad on Android.
-		Active                    = OVRPlugin.Controller.Active,   ///< Default controller. Represents the controller that most recently registered a button press from the user.
-		All                       = OVRPlugin.Controller.All,      ///< Represents the logical OR of all controllers.
+		None                      = OVRPlugin.Controller.None,    ///< Null controller.
+		LTouch                    = OVRPlugin.Controller.LTouch,  ///< Left Oculus Touch controller. Virtual input mapping differs from the combined L/R Touch mapping.
+		RTouch                    = OVRPlugin.Controller.RTouch,  ///< Right Oculus Touch controller. Virtual input mapping differs from the combined L/R Touch mapping.
+		Touch                     = OVRPlugin.Controller.Touch,   ///< Combined Left/Right pair of Oculus Touch controllers.
+		Remote                    = OVRPlugin.Controller.Remote,  ///< Oculus Remote controller.
+		Gamepad                   = OVRPlugin.Controller.Gamepad, ///< Xbox 360 or Xbox One gamepad on PC. Generic gamepad on Android.
+		Active                    = OVRPlugin.Controller.Active,  ///< Default controller. Represents the controller that most recently registered a button press from the user.
+		All                       = OVRPlugin.Controller.All,     ///< Represents the logical OR of all controllers.
 	}
 
 	private static readonly float AXIS_AS_BUTTON_THRESHOLD = 0.5f;
@@ -227,30 +226,6 @@ public static class OVRInput
 	private static List<OVRControllerBase> controllers;
 	private static Controller activeControllerType = Controller.None;
 	private static Controller connectedControllerTypes = Controller.None;
-	private static bool useFixedPoses = false;
-	private static int fixedUpdateCount = 0;
-
-
-	private static bool _pluginSupportsActiveController = false;
-	private static bool _pluginSupportsActiveControllerCached = false;
-	private static System.Version _pluginSupportsActiveControllerMinVersion = new System.Version(1, 9, 0);
-	private static bool pluginSupportsActiveController
-	{
-		get
-		{
-			if (!_pluginSupportsActiveControllerCached)
-			{
-				bool isSupportedPlatform = true;
-#if (UNITY_ANDROID && !UNITY_EDITOR) || UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
-				isSupportedPlatform = false;
-#endif
-				_pluginSupportsActiveController = isSupportedPlatform && (OVRPlugin.version >= _pluginSupportsActiveControllerMinVersion);
-				_pluginSupportsActiveControllerCached = true;
-			}
-
-			return _pluginSupportsActiveController;
-		}
-	}
 
 	/// <summary>
 	/// Creates an instance of OVRInput.
@@ -261,11 +236,8 @@ public static class OVRInput
 		{
 #if UNITY_ANDROID && !UNITY_EDITOR
 			new OVRControllerGamepadAndroid(),
-			new OVRControllerTouchpad(),
-#elif UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
-			new OVRControllerGamepadMac(),
 #else
-			new OVRControllerGamepadPC(),
+			new OVRControllerGamepadDesktop(),
 			new OVRControllerTouch(),
 			new OVRControllerLTouch(),
 			new OVRControllerRTouch(),
@@ -275,13 +247,11 @@ public static class OVRInput
 	}
 
 	/// <summary>
-	/// Updates the internal state of OVRInput. Must be called manually if used independently from OVRManager.
+	/// Updates the internal state of the OVRInput. Must be called manually if used independently from OVRManager.
 	/// </summary>
 	public static void Update()
 	{
 		connectedControllerTypes = Controller.None;
-		useFixedPoses = false;
-		fixedUpdateCount = 0;
 
 		for (int i = 0; i < controllers.Count; i++)
 		{
@@ -309,26 +279,6 @@ public static class OVRInput
 		{
 			activeControllerType = Controller.None;
 		}
-
-		if (pluginSupportsActiveController)
-		{
-			// override locally derived active and connected controllers if plugin provdes more accurate data
-			connectedControllerTypes = (OVRInput.Controller)OVRPlugin.GetConnectedControllers();
-			activeControllerType = (OVRInput.Controller)OVRPlugin.GetActiveController();
-		}
-	}
-
-	/// <summary>
-	/// Updates the internal physics state of OVRInput. Must be called manually if used independently from OVRManager.
-	/// </summary>
-	public static void FixedUpdate()
-	{
-		useFixedPoses = true;
-
-		double predictionSeconds = (double)fixedUpdateCount * Time.fixedDeltaTime / Mathf.Max(Time.timeScale, 1e-6f);
-		fixedUpdateCount++;
-		
-		OVRPlugin.UpdateNodePhysicsPoses(0, predictionSeconds);
 	}
 
 	/// <summary>
@@ -374,9 +324,9 @@ public static class OVRInput
 		switch (controllerType)
 		{
 			case Controller.LTouch:
-                return OVRPlugin.GetNodePose(OVRPlugin.Node.HandLeft, useFixedPoses).ToOVRPose().position;
+                return OVRPlugin.GetNodePose(OVRPlugin.Node.HandLeft).ToOVRPose().position;
             case Controller.RTouch:
-                return OVRPlugin.GetNodePose(OVRPlugin.Node.HandRight, useFixedPoses).ToOVRPose().position;
+                return OVRPlugin.GetNodePose(OVRPlugin.Node.HandRight).ToOVRPose().position;
             default:
 				return Vector3.zero;
 		}
@@ -391,9 +341,9 @@ public static class OVRInput
         switch (controllerType)
         {
             case Controller.LTouch:
-                return OVRPlugin.GetNodeVelocity(OVRPlugin.Node.HandLeft, useFixedPoses).ToOVRPose().position;
+                return OVRPlugin.GetNodeVelocity(OVRPlugin.Node.HandLeft).ToOVRPose().position;
             case Controller.RTouch:
-                return OVRPlugin.GetNodeVelocity(OVRPlugin.Node.HandRight, useFixedPoses).ToOVRPose().position;
+                return OVRPlugin.GetNodeVelocity(OVRPlugin.Node.HandRight).ToOVRPose().position;
             default:
                 return Vector3.zero;
         }
@@ -408,9 +358,9 @@ public static class OVRInput
         switch (controllerType)
         {
             case Controller.LTouch:
-                return OVRPlugin.GetNodeAcceleration(OVRPlugin.Node.HandLeft, useFixedPoses).ToOVRPose().position;
+                return OVRPlugin.GetNodeAcceleration(OVRPlugin.Node.HandLeft).ToOVRPose().position;
             case Controller.RTouch:
-                return OVRPlugin.GetNodeAcceleration(OVRPlugin.Node.HandRight, useFixedPoses).ToOVRPose().position;
+                return OVRPlugin.GetNodeAcceleration(OVRPlugin.Node.HandRight).ToOVRPose().position;
             default:
                 return Vector3.zero;
         }
@@ -425,9 +375,9 @@ public static class OVRInput
 		switch (controllerType)
 		{
 			case Controller.LTouch:
-                return OVRPlugin.GetNodePose(OVRPlugin.Node.HandLeft, useFixedPoses).ToOVRPose().orientation;
+                return OVRPlugin.GetNodePose(OVRPlugin.Node.HandLeft).ToOVRPose().orientation;
             case Controller.RTouch:
-                return OVRPlugin.GetNodePose(OVRPlugin.Node.HandRight, useFixedPoses).ToOVRPose().orientation;
+                return OVRPlugin.GetNodePose(OVRPlugin.Node.HandRight).ToOVRPose().orientation;
             default:
 				return Quaternion.identity;
 		}
@@ -442,9 +392,9 @@ public static class OVRInput
         switch (controllerType)
         {
             case Controller.LTouch:
-                return OVRPlugin.GetNodeVelocity(OVRPlugin.Node.HandLeft, useFixedPoses).ToOVRPose().orientation;
+                return OVRPlugin.GetNodeVelocity(OVRPlugin.Node.HandLeft).ToOVRPose().orientation;
             case Controller.RTouch:
-                return OVRPlugin.GetNodeVelocity(OVRPlugin.Node.HandRight, useFixedPoses).ToOVRPose().orientation;
+                return OVRPlugin.GetNodeVelocity(OVRPlugin.Node.HandRight).ToOVRPose().orientation;
             default:
                 return Quaternion.identity;
         }
@@ -459,9 +409,9 @@ public static class OVRInput
         switch (controllerType)
         {
             case Controller.LTouch:
-                return OVRPlugin.GetNodeAcceleration(OVRPlugin.Node.HandLeft, useFixedPoses).ToOVRPose().orientation;
+                return OVRPlugin.GetNodeAcceleration(OVRPlugin.Node.HandLeft).ToOVRPose().orientation;
             case Controller.RTouch:
-                return OVRPlugin.GetNodeAcceleration(OVRPlugin.Node.HandRight, useFixedPoses).ToOVRPose().orientation;
+                return OVRPlugin.GetNodeAcceleration(OVRPlugin.Node.HandRight).ToOVRPose().orientation;
             default:
                 return Quaternion.identity;
         }
@@ -1437,7 +1387,7 @@ public static class OVRInput
 			buttonMap.Two                      = RawButton.B;
 			buttonMap.Three                    = RawButton.X;
 			buttonMap.Four                     = RawButton.Y;
-			buttonMap.Start                    = RawButton.Start;
+			buttonMap.Start                    = RawButton.None;
 			buttonMap.Back                     = RawButton.None;
 			buttonMap.PrimaryShoulder          = RawButton.None;
 			buttonMap.PrimaryIndexTrigger      = RawButton.LIndexTrigger;
@@ -1520,7 +1470,7 @@ public static class OVRInput
 			buttonMap.Two                      = RawButton.Y;
 			buttonMap.Three                    = RawButton.None;
 			buttonMap.Four                     = RawButton.None;
-			buttonMap.Start                    = RawButton.Start;
+			buttonMap.Start                    = RawButton.None;
 			buttonMap.Back                     = RawButton.None;
 			buttonMap.PrimaryShoulder          = RawButton.None;
 			buttonMap.PrimaryIndexTrigger      = RawButton.LIndexTrigger;
@@ -1755,90 +1705,7 @@ public static class OVRInput
 		}
 	}
 
-	private class OVRControllerGamepadPC : OVRControllerBase
-	{
-		public OVRControllerGamepadPC()
-		{
-			controllerType = Controller.Gamepad;
-		}
-
-		public override void ConfigureButtonMap()
-		{
-			buttonMap.None                     = RawButton.None;
-			buttonMap.One                      = RawButton.A;
-			buttonMap.Two                      = RawButton.B;
-			buttonMap.Three                    = RawButton.X;
-			buttonMap.Four                     = RawButton.Y;
-			buttonMap.Start                    = RawButton.Start;
-			buttonMap.Back                     = RawButton.Back;
-			buttonMap.PrimaryShoulder          = RawButton.LShoulder;
-			buttonMap.PrimaryIndexTrigger      = RawButton.LIndexTrigger;
-			buttonMap.PrimaryHandTrigger       = RawButton.None;
-			buttonMap.PrimaryThumbstick        = RawButton.LThumbstick;
-			buttonMap.PrimaryThumbstickUp      = RawButton.LThumbstickUp;
-			buttonMap.PrimaryThumbstickDown    = RawButton.LThumbstickDown;
-			buttonMap.PrimaryThumbstickLeft    = RawButton.LThumbstickLeft;
-			buttonMap.PrimaryThumbstickRight   = RawButton.LThumbstickRight;
-			buttonMap.SecondaryShoulder        = RawButton.RShoulder;
-			buttonMap.SecondaryIndexTrigger    = RawButton.RIndexTrigger;
-			buttonMap.SecondaryHandTrigger     = RawButton.None;
-			buttonMap.SecondaryThumbstick      = RawButton.RThumbstick;
-			buttonMap.SecondaryThumbstickUp    = RawButton.RThumbstickUp;
-			buttonMap.SecondaryThumbstickDown  = RawButton.RThumbstickDown;
-			buttonMap.SecondaryThumbstickLeft  = RawButton.RThumbstickLeft;
-			buttonMap.SecondaryThumbstickRight = RawButton.RThumbstickRight;
-			buttonMap.DpadUp                   = RawButton.DpadUp;
-			buttonMap.DpadDown                 = RawButton.DpadDown;
-			buttonMap.DpadLeft                 = RawButton.DpadLeft;
-			buttonMap.DpadRight                = RawButton.DpadRight;
-			buttonMap.Up                       = RawButton.LThumbstickUp;
-			buttonMap.Down                     = RawButton.LThumbstickDown;
-			buttonMap.Left                     = RawButton.LThumbstickLeft;
-			buttonMap.Right                    = RawButton.LThumbstickRight;
-		}
-
-		public override void ConfigureTouchMap()
-		{
-			touchMap.None                      = RawTouch.None;
-			touchMap.One                       = RawTouch.None;
-			touchMap.Two                       = RawTouch.None;
-			touchMap.Three                     = RawTouch.None;
-			touchMap.Four                      = RawTouch.None;
-			touchMap.PrimaryIndexTrigger       = RawTouch.None;
-			touchMap.PrimaryThumbstick         = RawTouch.None;
-			touchMap.PrimaryThumbRest          = RawTouch.None;
-			touchMap.SecondaryIndexTrigger     = RawTouch.None;
-			touchMap.SecondaryThumbstick       = RawTouch.None;
-			touchMap.SecondaryThumbRest        = RawTouch.None;
-		}
-
-		public override void ConfigureNearTouchMap()
-		{
-			nearTouchMap.None                      = RawNearTouch.None;
-			nearTouchMap.PrimaryIndexTrigger       = RawNearTouch.None;
-			nearTouchMap.PrimaryThumbButtons       = RawNearTouch.None;
-			nearTouchMap.SecondaryIndexTrigger     = RawNearTouch.None;
-			nearTouchMap.SecondaryThumbButtons     = RawNearTouch.None;
-		}
-
-		public override void ConfigureAxis1DMap()
-		{
-			axis1DMap.None                      = RawAxis1D.None;
-			axis1DMap.PrimaryIndexTrigger       = RawAxis1D.LIndexTrigger;
-			axis1DMap.PrimaryHandTrigger        = RawAxis1D.None;
-			axis1DMap.SecondaryIndexTrigger     = RawAxis1D.RIndexTrigger;
-			axis1DMap.SecondaryHandTrigger      = RawAxis1D.None;
-		}
-
-		public override void ConfigureAxis2DMap()
-		{
-			axis2DMap.None                      = RawAxis2D.None;
-			axis2DMap.PrimaryThumbstick         = RawAxis2D.LThumbstick;
-			axis2DMap.SecondaryThumbstick       = RawAxis2D.RThumbstick;
-		}
-	}
-
-	private class OVRControllerGamepadMac : OVRControllerBase
+	private class OVRControllerGamepadDesktop : OVRControllerBase
 	{
 		/// <summary> An axis on the gamepad. </summary>
 		private enum AxisGPC
@@ -1877,15 +1744,18 @@ public static class OVRInput
 		};
 
 		private bool initialized = false;
+		private bool joystickDetected = false;
+		private float joystickCheckInterval = 1.0f;
+		private float joystickCheckTime = 0.0f;
 
-		public OVRControllerGamepadMac()
+		public OVRControllerGamepadDesktop()
 		{
 			controllerType = Controller.Gamepad;
 
 			initialized = OVR_GamepadController_Initialize();
 		}
 
-		~OVRControllerGamepadMac()
+		~OVRControllerGamepadDesktop()
 		{
 			if (!initialized)
 				return;
@@ -2295,154 +2165,6 @@ public static class OVRInput
 		public override void SetControllerVibration(float frequency, float amplitude)
 		{
 
-		}
-	}
-
-	private class OVRControllerTouchpad : OVRControllerBase
-	{
-		private Vector3 moveAmountMouse;
-		private float minMovMagnitudeMouse = 25.0f;
-
-		public OVRControllerTouchpad()
-		{
-			controllerType = Controller.Touchpad;
-		}
-
-		public override Controller Update()
-		{
-			OVRPlugin.ControllerState state = new OVRPlugin.ControllerState();
-
-			if (Input.mousePresent)
-				state.ConnectedControllers = (uint)Controller.Touchpad;
-
-			if (Input.GetMouseButtonDown(0))
-			{
-				moveAmountMouse = Input.mousePosition;
-			}
-
-			if (Input.GetMouseButtonUp(0))
-			{
-				moveAmountMouse -= Input.mousePosition;
-
-				Vector3 move = moveAmountMouse;
-
-				if (move.magnitude < minMovMagnitudeMouse)
-				{
-					state.Buttons |= (uint)RawButton.A;
-				}
-				else
-				{
-					move.Normalize();
-
-					// Left/Right
-					if (Mathf.Abs(move.x) > Mathf.Abs(move.y))
-					{
-						if (move.x > 0.0f)
-						{
-							state.Buttons |= (uint)RawButton.DpadRight;
-						}
-						else
-						{
-							state.Buttons |= (uint)RawButton.DpadLeft;
-						}
-					}
-					// Up/Down
-					else
-					{
-						if (move.y > 0.0f)
-						{
-							state.Buttons |= (uint)RawButton.DpadDown;
-						}
-						else
-						{
-							state.Buttons |= (uint)RawButton.DpadUp;
-						}
-					}
-				}
-			}
-
-			if (Input.GetKey(KeyCode.Escape))
-				state.Buttons |= (uint)RawButton.B;
-
-			previousState = currentState;
-			currentState = state;
-
-			return ((Controller)currentState.ConnectedControllers & controllerType);
-		}
-
-		public override void ConfigureButtonMap()
-		{
-			buttonMap.None                     = RawButton.None;
-			buttonMap.One                      = RawButton.A;
-			buttonMap.Two                      = RawButton.B;
-			buttonMap.Three                    = RawButton.None;
-			buttonMap.Four                     = RawButton.None;
-			buttonMap.Start                    = RawButton.None;
-			buttonMap.Back                     = RawButton.None;
-			buttonMap.PrimaryShoulder          = RawButton.None;
-			buttonMap.PrimaryIndexTrigger      = RawButton.None;
-			buttonMap.PrimaryHandTrigger       = RawButton.None;
-			buttonMap.PrimaryThumbstick        = RawButton.None;
-			buttonMap.PrimaryThumbstickUp      = RawButton.None;
-			buttonMap.PrimaryThumbstickDown    = RawButton.None;
-			buttonMap.PrimaryThumbstickLeft    = RawButton.None;
-			buttonMap.PrimaryThumbstickRight   = RawButton.None;
-			buttonMap.SecondaryShoulder        = RawButton.None;
-			buttonMap.SecondaryIndexTrigger    = RawButton.None;
-			buttonMap.SecondaryHandTrigger     = RawButton.None;
-			buttonMap.SecondaryThumbstick      = RawButton.None;
-			buttonMap.SecondaryThumbstickUp    = RawButton.None;
-			buttonMap.SecondaryThumbstickDown  = RawButton.None;
-			buttonMap.SecondaryThumbstickLeft  = RawButton.None;
-			buttonMap.SecondaryThumbstickRight = RawButton.None;
-			buttonMap.DpadUp                   = RawButton.DpadUp;
-			buttonMap.DpadDown                 = RawButton.DpadDown;
-			buttonMap.DpadLeft                 = RawButton.DpadLeft;
-			buttonMap.DpadRight                = RawButton.DpadRight;
-			buttonMap.Up                       = RawButton.DpadUp;
-			buttonMap.Down                     = RawButton.DpadDown;
-			buttonMap.Left                     = RawButton.DpadLeft;
-			buttonMap.Right                    = RawButton.DpadRight;
-		}
-
-		public override void ConfigureTouchMap()
-		{
-			touchMap.None                      = RawTouch.None;
-			touchMap.One                       = RawTouch.None;
-			touchMap.Two                       = RawTouch.None;
-			touchMap.Three                     = RawTouch.None;
-			touchMap.Four                      = RawTouch.None;
-			touchMap.PrimaryIndexTrigger       = RawTouch.None;
-			touchMap.PrimaryThumbstick         = RawTouch.None;
-			touchMap.PrimaryThumbRest          = RawTouch.None;
-			touchMap.SecondaryIndexTrigger     = RawTouch.None;
-			touchMap.SecondaryThumbstick       = RawTouch.None;
-			touchMap.SecondaryThumbRest        = RawTouch.None;
-		}
-
-		public override void ConfigureNearTouchMap()
-		{
-			nearTouchMap.None                  = RawNearTouch.None;
-			nearTouchMap.PrimaryIndexTrigger   = RawNearTouch.None;
-			nearTouchMap.PrimaryThumbButtons   = RawNearTouch.None;
-			nearTouchMap.SecondaryIndexTrigger = RawNearTouch.None;
-			nearTouchMap.SecondaryThumbButtons = RawNearTouch.None;
-		}
-
-		public override void ConfigureAxis1DMap()
-		{
-			axis1DMap.None                     = RawAxis1D.None;
-			axis1DMap.PrimaryIndexTrigger      = RawAxis1D.None;
-			axis1DMap.PrimaryHandTrigger       = RawAxis1D.None;
-			axis1DMap.SecondaryIndexTrigger    = RawAxis1D.None;
-			axis1DMap.SecondaryHandTrigger     = RawAxis1D.None;
-		}
-
-		public override void ConfigureAxis2DMap()
-		{
-			axis2DMap.None                     = RawAxis2D.None;
-			axis2DMap.PrimaryThumbstick        = RawAxis2D.None;
-			axis2DMap.SecondaryThumbstick      = RawAxis2D.None;
 		}
 	}
 }
